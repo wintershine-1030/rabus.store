@@ -1,1 +1,21 @@
-{"scope":"/","start_url":"/","display":"standalone","icons":[{"sizes":"192x192","type":"image/png","src":"//img1.wsimg.com/isteam/ip/f78f8035-78bc-4717-863a-aadc9a5223cc/AnkaSpace_wordmark-white-8133075.png/:/rs=w:192,h:192,m"},{"sizes":"512x512","type":"image/png","src":"//img1.wsimg.com/isteam/ip/f78f8035-78bc-4717-863a-aadc9a5223cc/AnkaSpace_wordmark-white-8133075.png/:/rs=w:512,h:512,m"}],"name":"Anka Space","short_name":"Anka Space","theme_color":"#000000","background_color":"#000000"}
+{
+  "scope": "/",
+  "start_url": "/",
+  "display": "standalone",
+  "icons": [
+    {
+      "sizes": "192x192",
+      "type": "image/png",
+      "src": "//img1.wsimg.com/isteam/ip/f78f8035-78bc-4717-863a-aadc9a5223cc/AnkaSpace_wordmark-white-8133075.png/:/rs=w:192,h:192,m"
+    },
+    {
+      "sizes": "512x512",
+      "type": "image/png",
+      "src": "//img1.wsimg.com/isteam/ip/f78f8035-78bc-4717-863a-aadc9a5223cc/AnkaSpace_wordmark-white-8133075.png/:/rs=w:512,h:512,m"
+    }
+  ],
+  "name": "Rabus",
+  "short_name": "Rabus",
+  "theme_color": "#000000",
+  "background_color": "#000000"
+}
