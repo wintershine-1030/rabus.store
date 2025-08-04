@@ -1635,7 +1635,7 @@
             n = s(370),
             r = s(522),
             i = s(634);
-        // const c = JSON.parse('["ankaspace\\\\.store(?:/.*)?/ola/services/.*","ankaspace\\\\.store/ola/meetings/.*","/api/","https://api\\\\.ola\\\\.godaddy\\\\.com","https://f78f8035-78bc-4717-863a-aadc9a5223cc\\\\.onlinestore\\\\.godaddy\\\\.com","/t/1/tl/event","google-analytics\\\\.com/collect","calendar\\\\.apps\\\\.(dev-|test-)?secureserver\\\\.net"]').map((e => new RegExp(e))),
+        const c = JSON.parse('["ankaspace\\\\.store(?:/.*)?/ola/services/.*","ankaspace\\\\.store/ola/meetings/.*","/api/","https://api\\\\.ola\\\\.godaddy\\\\.com","https://f78f8035-78bc-4717-863a-aadc9a5223cc\\\\.onlinestore\\\\.godaddy\\\\.com","/t/1/tl/event","google-analytics\\\\.com/collect","calendar\\\\.apps\\\\.(dev-|test-)?secureserver\\\\.net"]').map((e => new RegExp(e))),
             o = JSON.parse('["ankaspace\\\\.store(?:/.*)?/f/.*","https://blog\\\\.apps\\\\.secureserver\\\\.net/v1/website/f78f8035-78bc-4717-863a-aadc9a5223cc/feed/post/","https://blog\\\\.apps\\\\.secureserver\\\\.net/v1/website/f78f8035-78bc-4717-863a-aadc9a5223cc/feed"]').map((e => new RegExp(e))),
             h = JSON.parse('["/privacy-policy","/terms-and-conditions","/"]').map((e => ({
                 url: e,
