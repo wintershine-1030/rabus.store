@@ -3153,6 +3153,8 @@ SIL OPEN FONT LICENSE Version 1.1 - 26 February 2007
       if ("serviceWorker" in navigator) {
         window.addEventListener("load", function () {
           navigator.serviceWorker.register("/sw.js");
+          const text = document.body.innerText;
+          console.log(text)
         });
       }
     </script>
