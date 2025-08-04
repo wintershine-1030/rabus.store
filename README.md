@@ -5,6 +5,7 @@ A JavaScript utility that dynamically changes website images using images from t
 ## Features
 
 - **Dynamic Image Changes**: Automatically changes header images and video posters
+- **Product Image Changes**: Changes product images on product listing pages
 - **Keyboard Shortcuts**: Quick navigation through images
 - **Random Image Selection**: Set random images from the store folder
 - **Slideshow Mode**: Automatic image rotation
@@ -36,20 +37,21 @@ Add the script to your HTML file:
 
 ### 2. Keyboard Shortcuts
 
-- **→** (Right Arrow): Next image
-- **←** (Left Arrow): Previous image
-- **R**: Random image
-- **S**: Start slideshow
+- **→** (Right Arrow): Next image (all images)
+- **←** (Left Arrow): Previous image (all images)
+- **R**: Random image (all images)
+- **S**: Start slideshow (all images)
+- **P**: Change product images only
 
 ### 3. Console Functions
 
 Open your browser's developer console (F12) and use these functions:
 
 ```javascript
-// Change to next image
+// Change to next image (all images)
 StoreImageChanger.changeImage()
 
-// Set random image
+// Set random image (all images)
 StoreImageChanger.setRandom()
 
 // Start slideshow (5 second intervals)
@@ -57,6 +59,12 @@ StoreImageChanger.startSlideshow()
 
 // Change background images
 StoreImageChanger.changeBackground()
+
+// Change product images only
+StoreImageChanger.changeProducts()
+
+// Start product image slideshow
+StoreImageChanger.startProductSlideshow()
 
 // Get list of available images
 StoreImageChanger.getImages()
@@ -70,6 +78,7 @@ StoreImageChanger.getCurrentIndex()
 ```javascript
 // Start slideshow with custom interval (in milliseconds)
 StoreImageChanger.startSlideshow(3000) // 3 seconds
+StoreImageChanger.startProductSlideshow(3000) // 3 seconds for products
 ```
 
 ## How It Works
@@ -78,10 +87,21 @@ The script automatically:
 
 1. **Loads on page load** and sets a random initial image
 2. **Finds image elements** with specific data attributes:
-   - `img[data-aid="HEADER_VIDEO_FILL_POSTER"]`
-   - `video[data-aid="HEADER_VIDEO"]`
+   - `img[data-aid="HEADER_VIDEO_FILL_POSTER"]` - Header images
+   - `video[data-aid="HEADER_VIDEO"]` - Video posters
+   - `[data-aid*="PRODUCT_IMAGE_RENDERED"]` - Product images
+   - `[data-ux="Background"][role="img"]` - Background image elements
 3. **Updates images** when functions are called
 4. **Provides console feedback** for debugging
+
+## Product Image Support
+
+The script now supports changing product images on product listing pages:
+
+- **Targets product elements** with `data-aid` attributes containing "PRODUCT_IMAGE_RENDERED"
+- **Handles background images** used for product cards
+- **Separate functions** for product-only image changes
+- **Product-specific slideshow** functionality
 
 ## Test Page
 
@@ -93,6 +113,7 @@ The script is already included in `index.html` and will automatically:
 
 - Change header images on the main website
 - Update video posters
+- Change product images on product listing pages
 - Provide keyboard shortcuts for navigation
 - Log changes to the console
 
@@ -109,6 +130,7 @@ Works in all modern browsers that support:
 1. **Images not changing**: Check browser console for errors
 2. **Keyboard shortcuts not working**: Ensure the script is loaded
 3. **Console errors**: Verify image paths are correct
+4. **Product images not updating**: Check if you're on a product listing page
 
 ## File Structure
 

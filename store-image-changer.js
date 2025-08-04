@@ -18,9 +18,11 @@ let currentImageIndex = 0;
 
 // Function to change store images
 function changeStoreImage() {
-    // Find all image elements
+    // Find all image elements - header images and product images
     const headerImages = document.querySelectorAll('img[data-aid="HEADER_VIDEO_FILL_POSTER"]');
     const videoPosters = document.querySelectorAll('video[data-aid="HEADER_VIDEO"]');
+    const productImages = document.querySelectorAll('[data-aid*="PRODUCT_IMAGE_RENDERED"]');
+    const backgroundElements = document.querySelectorAll('[data-ux="Background"][role="img"]');
     
     // Select next image
     currentImageIndex = (currentImageIndex + 1) % storeImages.length;
@@ -35,6 +37,21 @@ function changeStoreImage() {
     // Change video posters
     videoPosters.forEach(video => {
         video.poster = newImageSrc;
+    });
+    
+    // Change product images
+    productImages.forEach(element => {
+        if (element.tagName === 'IMG') {
+            element.src = newImageSrc;
+            element.alt = newImageSrc;
+        } else if (element.style.backgroundImage) {
+            element.style.backgroundImage = `url(${newImageSrc})`;
+        }
+    });
+    
+    // Change background elements (product cards)
+    backgroundElements.forEach(element => {
+        element.style.backgroundImage = `url(${newImageSrc})`;
     });
     
     console.log('Image changed to:', newImageSrc);
@@ -61,7 +78,7 @@ function setRandomImage() {
     const randomImageSrc = storeImages[randomIndex];
     
     // Change all image elements
-    const allImages = document.querySelectorAll('img[data-aid="HEADER_VIDEO_FILL_POSTER"], video[data-aid="HEADER_VIDEO"]');
+    const allImages = document.querySelectorAll('img[data-aid="HEADER_VIDEO_FILL_POSTER"], video[data-aid="HEADER_VIDEO"], [data-aid*="PRODUCT_IMAGE_RENDERED"], [data-ux="Background"][role="img"]');
     
     allImages.forEach(element => {
         if (element.tagName === 'IMG') {
@@ -69,10 +86,38 @@ function setRandomImage() {
             element.alt = randomImageSrc;
         } else if (element.tagName === 'VIDEO') {
             element.poster = randomImageSrc;
+        } else if (element.style.backgroundImage) {
+            element.style.backgroundImage = `url(${randomImageSrc})`;
         }
     });
     
     console.log('Random image set to:', randomImageSrc);
+}
+
+// Function to change only product images
+function changeProductImages() {
+    const productImages = document.querySelectorAll('[data-aid*="PRODUCT_IMAGE_RENDERED"]');
+    const backgroundElements = document.querySelectorAll('[data-ux="Background"][role="img"]');
+    
+    currentImageIndex = (currentImageIndex + 1) % storeImages.length;
+    const newImageSrc = storeImages[currentImageIndex];
+    
+    // Change product images
+    productImages.forEach(element => {
+        if (element.tagName === 'IMG') {
+            element.src = newImageSrc;
+            element.alt = newImageSrc;
+        } else if (element.style.backgroundImage) {
+            element.style.backgroundImage = `url(${newImageSrc})`;
+        }
+    });
+    
+    // Change background elements (product cards)
+    backgroundElements.forEach(element => {
+        element.style.backgroundImage = `url(${newImageSrc})`;
+    });
+    
+    console.log('Product images changed to:', newImageSrc);
 }
 
 // Function to start automatic image slideshow
@@ -82,6 +127,15 @@ function startImageSlideshow(interval = 5000) {
     }, interval);
     
     console.log(`Image slideshow started with ${interval}ms interval.`);
+}
+
+// Function to start product image slideshow
+function startProductSlideshow(interval = 5000) {
+    setInterval(() => {
+        changeProductImages();
+    }, interval);
+    
+    console.log(`Product image slideshow started with ${interval}ms interval.`);
 }
 
 // Initialize when page loads
@@ -110,6 +164,10 @@ document.addEventListener('DOMContentLoaded', function() {
             case 'S':
                 startImageSlideshow();
                 break;
+            case 'p':
+            case 'P':
+                changeProductImages();
+                break;
         }
     });
     
@@ -118,14 +176,17 @@ document.addEventListener('DOMContentLoaded', function() {
     console.log('- ← : Previous image');
     console.log('- R : Random image');
     console.log('- S : Start slideshow');
+    console.log('- P : Change product images only');
 });
 
 // Expose functions globally (available in browser console)
 window.StoreImageChanger = {
     changeImage: changeStoreImage,
     changeBackground: changeBackgroundImage,
+    changeProducts: changeProductImages,
     setRandom: setRandomImage,
     startSlideshow: startImageSlideshow,
+    startProductSlideshow: startProductSlideshow,
     getImages: () => storeImages,
     getCurrentIndex: () => currentImageIndex
 }; 

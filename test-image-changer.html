@@ -44,6 +44,12 @@
         button:hover {
             background-color: #0056b3;
         }
+        .product-button {
+            background-color: #28a745;
+        }
+        .product-button:hover {
+            background-color: #218838;
+        }
         .info {
             background-color: #e9ecef;
             padding: 15px;
@@ -62,6 +68,13 @@
             border-radius: 5px;
             margin-top: 20px;
         }
+        .product-section {
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 20px 0;
+            border-left: 4px solid #28a745;
+        }
     </style>
 </head>
 <body>
@@ -76,18 +89,27 @@
         <div class="keyboard-shortcuts">
             <h3>Keyboard Shortcuts:</h3>
             <ul>
-                <li><strong>→</strong> (Right Arrow): Next image</li>
-                <li><strong>←</strong> (Left Arrow): Previous image</li>
-                <li><strong>R</strong>: Random image</li>
-                <li><strong>S</strong>: Start slideshow</li>
+                <li><strong>→</strong> (Right Arrow): Next image (all images)</li>
+                <li><strong>←</strong> (Left Arrow): Previous image (all images)</li>
+                <li><strong>R</strong>: Random image (all images)</li>
+                <li><strong>S</strong>: Start slideshow (all images)</li>
+                <li><strong>P</strong>: Change product images only</li>
             </ul>
         </div>
 
         <div class="controls">
-            <button onclick="StoreImageChanger.changeImage()">Next Image</button>
-            <button onclick="StoreImageChanger.setRandom()">Random Image</button>
-            <button onclick="StoreImageChanger.startSlideshow()">Start Slideshow</button>
+            <button onclick="StoreImageChanger.changeImage()">Next Image (All)</button>
+            <button onclick="StoreImageChanger.setRandom()">Random Image (All)</button>
+            <button onclick="StoreImageChanger.startSlideshow()">Start Slideshow (All)</button>
             <button onclick="StoreImageChanger.changeBackground()">Change Background</button>
+        </div>
+
+        <div class="product-section">
+            <h3>Product Image Controls:</h3>
+            <div class="controls">
+                <button class="product-button" onclick="StoreImageChanger.changeProducts()">Change Product Images</button>
+                <button class="product-button" onclick="StoreImageChanger.startProductSlideshow()">Product Slideshow</button>
+            </div>
         </div>
 
         <img id="test-image" class="header-image" src="store/photo_2025-08-02_11-30-21.jpg" alt="Store Image">
@@ -99,9 +121,21 @@
             <ul>
                 <li><code>StoreImageChanger.getImages()</code> - Get list of available images</li>
                 <li><code>StoreImageChanger.getCurrentIndex()</code> - Get current image index</li>
-                <li><code>StoreImageChanger.changeImage()</code> - Change to next image</li>
-                <li><code>StoreImageChanger.setRandom()</code> - Set random image</li>
+                <li><code>StoreImageChanger.changeImage()</code> - Change to next image (all)</li>
+                <li><code>StoreImageChanger.setRandom()</code> - Set random image (all)</li>
+                <li><code>StoreImageChanger.changeProducts()</code> - Change product images only</li>
+                <li><code>StoreImageChanger.startProductSlideshow()</code> - Start product slideshow</li>
             </ul>
+        </div>
+
+        <div class="product-section">
+            <h3>Product Image Testing:</h3>
+            <p>This script now targets product images on product listing pages using these selectors:</p>
+            <ul>
+                <li><code>[data-aid*="PRODUCT_IMAGE_RENDERED"]</code> - Product image elements</li>
+                <li><code>[data-ux="Background"][role="img"]</code> - Background image elements</li>
+            </ul>
+            <p>On product pages, you can use the <strong>P</strong> key or <code>StoreImageChanger.changeProducts()</code> to change only product images.</p>
         </div>
     </div>
 
