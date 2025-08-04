@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Store Image Changer Test</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f0f0f0;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .header-image {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+        .controls {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+        button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            background-color: #007bff;
+            color: white;
+            cursor: pointer;
+            font-size: 14px;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .info {
+            background-color: #e9ecef;
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+        .keyboard-shortcuts {
+            background-color: #fff3cd;
+            padding: 15px;
+            border-radius: 5px;
+            border-left: 4px solid #ffc107;
+        }
+        .console-info {
+            background-color: #d1ecf1;
+            padding: 15px;
+            border-radius: 5px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Store Image Changer Test</h1>
+        
+        <div class="info">
+            <h3>About this test:</h3>
+            <p>This page demonstrates the Store Image Changer functionality. The script will automatically load images from the <code>store/</code> folder and allow you to change them dynamically.</p>
+        </div>
+
+        <div class="keyboard-shortcuts">
+            <h3>Keyboard Shortcuts:</h3>
+            <ul>
+                <li><strong>→</strong> (Right Arrow): Next image</li>
+                <li><strong>←</strong> (Left Arrow): Previous image</li>
+                <li><strong>R</strong>: Random image</li>
+                <li><strong>S</strong>: Start slideshow</li>
+            </ul>
+        </div>
+
+        <div class="controls">
+            <button onclick="StoreImageChanger.changeImage()">Next Image</button>
+            <button onclick="StoreImageChanger.setRandom()">Random Image</button>
+            <button onclick="StoreImageChanger.startSlideshow()">Start Slideshow</button>
+            <button onclick="StoreImageChanger.changeBackground()">Change Background</button>
+        </div>
+
+        <img id="test-image" class="header-image" src="store/photo_2025-08-02_11-30-21.jpg" alt="Store Image">
+
+        <div class="console-info">
+            <h3>Console Information:</h3>
+            <p>Open your browser's developer console (F12) to see detailed information about image changes and available functions.</p>
+            <p>You can also use the global <code>StoreImageChanger</code> object in the console:</p>
+            <ul>
+                <li><code>StoreImageChanger.getImages()</code> - Get list of available images</li>
+                <li><code>StoreImageChanger.getCurrentIndex()</code> - Get current image index</li>
+                <li><code>StoreImageChanger.changeImage()</code> - Change to next image</li>
+                <li><code>StoreImageChanger.setRandom()</code> - Set random image</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Store Image Changer Script -->
+    <script src="store-image-changer.js"></script>
+    
+    <script>
+        // Additional test functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('Test page loaded successfully!');
+            console.log('Try using the keyboard shortcuts or buttons to change images.');
+            
+            // Update the test image when StoreImageChanger changes images
+            const originalChangeImage = StoreImageChanger.changeImage;
+            StoreImageChanger.changeImage = function() {
+                originalChangeImage.call(this);
+                const testImage = document.getElementById('test-image');
+                if (testImage) {
+                    testImage.src = storeImages[currentImageIndex];
+                }
+            };
+            
+            const originalSetRandom = StoreImageChanger.setRandom;
+            StoreImageChanger.setRandom = function() {
+                originalSetRandom.call(this);
+                const testImage = document.getElementById('test-image');
+                if (testImage) {
+                    testImage.src = storeImages[currentImageIndex];
+                }
+            };
+        });
+    </script>
+</body>
+</html> 
